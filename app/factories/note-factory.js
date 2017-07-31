@@ -15,6 +15,18 @@ notesApp.factory('NoteFactory', function($http, $q, FirebaseUrl) {
     });
   };
 
+  let getNote = (noteId) => {
+  	return $q( (resolve, reject) => {
+  		$http.get(`${FirebaseUrl}notes/${noteId}.json`)
+  		.then( (noteData) => {
+  			resolve(noteData);
+  		})
+  		.catch((err)=>{
+  			reject(err);
+  		})
+  	});
+  };
+
   return {postNewNote};
 
 });
